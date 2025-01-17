@@ -51,7 +51,6 @@ const App = () => {
         path="/"
         element={<PokemonList pokemonList={pokemonList} />}
       />
-      <Route exact path="/version" element={<div>1</div>} />
       <Route
         exact
         path="/pokemon/:name"
