@@ -1,5 +1,6 @@
 module.exports = {
   env: {
+    node: true,
     browser: true,
     es6: true,
     'jest/globals': true
@@ -26,7 +27,7 @@ module.exports = {
     'no-trailing-spaces': 'error',
     'object-curly-spacing': ['error', 'always'],
     'arrow-spacing': ['error', { before: true, after: true }],
-    'no-console': 'error',
+    'no-console': 'off',
     'react/prop-types': 0,
     'prettier/prettier': [
       'warn',
