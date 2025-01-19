@@ -58,13 +58,12 @@ jobs:
         with:
           args: '❌ The project {{ EVENT_PAYLOAD.repository.full_name }} has NOT been deployed.'
   tag_release:
-    if: ${{ github.env.CONDITION == 'false' }}
+    if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v4
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@f278d49d30cdd8775cc3e7dd00b5ee11686ee297
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
