@@ -54,9 +54,12 @@ jobs:
         if: ${{ failure() }}
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          COMMIT_URL: ${{ github.event.head_commit.url }}
         uses: Ilshidur/action-discord@0c4b27844ba47cb1c7bee539c8eead5284ce9fa9
         with:
-          args: '❌ The project {{ EVENT_PAYLOAD.repository.full_name }} has NOT been deployed.'
+          args: |
+            ❌ Deployment failed for commit:
+            [View Commit](${{ env.COMMIT_URL }})
   tag_release:
     if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
     needs: [simple_deployment_pipeline]
