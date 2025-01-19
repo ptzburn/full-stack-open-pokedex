@@ -44,14 +44,14 @@ jobs:
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
       - name: Deploy Success
-        uses: rjstone/discord-webhook-notify@1.0.4
+        uses: rjstone/discord-webhook-notify@v1.0.4
         if: success()
         with:
           severity: info
           details: Deploy succeeded.
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Deploy Failure
-        uses: rjstone/discord-webhook-notify@1.0.4
+        uses: rjstone/discord-webhook-notify@v1.0.4
         if: failure()
         with:
           severity: error
