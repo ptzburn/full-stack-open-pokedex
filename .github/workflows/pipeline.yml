@@ -25,7 +25,6 @@ jobs:
         run: npm run eslint
       - name: Build
         run: npm run build
-        id: build
       - name: Run tests
         run: npm run test
       - name: Install Playwright Browsers
@@ -53,7 +52,7 @@ jobs:
         with:
           args: '✅ The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
       - name: Build Failure
-        if: ${{ steps.build.outcome == 'failure' }}
+        if: ${{ failure() }}
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           COMMIT_URL: ${{ github.event.head_commit.url }}
