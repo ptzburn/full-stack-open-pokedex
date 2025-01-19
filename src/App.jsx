@@ -12,6 +12,7 @@ import PokemonPage from './PokemonPage'
 import PokemonList from './PokemonList'
 
 const mapResults = ({ results }) =>
+  console.log('hello'
   results.map(({ url, name }) => ({
     url,
     name,
