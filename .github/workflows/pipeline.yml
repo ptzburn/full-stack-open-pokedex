@@ -44,19 +44,11 @@ jobs:
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
       - name: Deploy Success
-        uses: rjstone/discord-webhook-notify@v1.0.4
-        if: success()
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@0c4b27844ba47cb1c7bee539c8eead5284ce9fa9
         with:
-          severity: info
-          details: Deploy succeeded.
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      - name: Deploy Failure
-        uses: rjstone/discord-webhook-notify@v1.0.4
-        if: failure()
-        with:
-          severity: error
-          details: Deploy failed.
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
   tag_release:
     if: ${{ github.env.CONDITION == 'false' }}
     needs: [simple_deployment_pipeline]
